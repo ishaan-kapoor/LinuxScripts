@@ -1,0 +1,29 @@
+#!/bin/sh
+id=$(xwininfo | awk '/Window id:/ {print $4}')
+
+if [ -z "$id" ]; then
+    echo "No window selected"
+    exit 1
+fi
+# if [ -z $1 ]; then
+#     echo "Usage: $0 [+-=] [amount]"
+#     exit 1
+# fi
+
+default="0.05"
+if [ "$1" = "+" ]; then
+    change="inc"
+elif [ "$1" = "-" ]; then
+    change="dec"
+# elif [ "$1" = "=" ]; then
+else
+    change="toggle"
+    default="0.9"
+# else
+#     echo "Usage: $0 [+-=] [amount]"
+#     echo "$1 unknown"
+#     exit 1
+fi
+
+val=$(transset-df -i "$id" --$change "${2:-$default}" | awk '{print $4}')
+notify-send -t 1000 "Transparency" "Set to $val"

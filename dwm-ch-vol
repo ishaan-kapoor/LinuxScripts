@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# re='^[+-]?[0-9]+%$'
+# if [[ $1 =~ $re ]]; then
+#   pactl set-sink-volume @DEFAULT_SINK@ "$1"
+# elif [[ "$1" == "mute" ]]; then
+#   pactl set-sink-mute @DEFAULT_SINK@ toggle
+# else
+#   echo "error" >&2; exit 1
+# fi
+
+# var=$1
+var=${1%"%"}
+if [ -n "$var" ] && [ "$var" -eq "$var" ] 2>/dev/null; then
+  pactl set-sink-volume @DEFAULT_SINK@ "$var""%"
+elif [ "$1" = "mute" ]; then
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+else
+  echo "error" >&2; exit 1
+fi
+/home/ishaan/programs/scripts/sb-refresh

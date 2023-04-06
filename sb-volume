@@ -1,0 +1,21 @@
+#!/bin/sh
+
+mute="$(pactl get-sink-mute @DEFAULT_SINK@  | awk '{print $2}')"
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | head -1 | awk '{print ($12+$5)/2}')
+
+[ "$vol" -gt 100 ] && notify-send -t 1000 "Volume too high"
+
+if [ "$mute" = "yes" ]; then
+  icon="󰝟"
+else
+  if [ "$vol" -gt 66 ]; then
+    icon="󰕾"
+  elif [ "$vol" -gt 33 ]; then
+    icon="󰖀"
+  else
+    icon="󰕿"
+  fi
+fi
+
+echo "$vol% $icon"
+

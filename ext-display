@@ -1,0 +1,18 @@
+#!/bin/sh
+
+internal="eDP-1"
+external="HDMI-1-1"
+selection=$(printf "duplicate\nextend\ndisconnect" | dmenu -p "Monitor Configuration" -c -l 3)
+if [ -z "$selection" ]; then
+    notify-send -t 1000 "Multi Monitor" "No Operation Selected"
+    exit 0
+fi
+
+case "$selection" in
+    "disconnect") xrandr --output "$external" --off --output "$internal" --auto ;;
+    "extend") xrandr --output "$external" --mode 1920x1080 && xrandr --output "$internal" --auto --output "$external" --right-of "$internal" ;;
+    "duplicate") xrandr --output "$external" --mode 1920x1080 && xrandr --output "$internal" --auto --output "$external" --same-as "$internal" ;;
+    *) notify-send "Multi Monitor" "Unknown Operation" ;;
+esac
+
+/home/ishaan/.fehbg

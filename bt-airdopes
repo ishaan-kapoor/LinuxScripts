@@ -1,0 +1,10 @@
+#!/bin/sh
+
+systemctl start bluetooth
+bluetoothctl power on
+bluetoothctl agent on
+bluetoothctl scan on
+bluetoothctl remove 19:C9:FE:FC:59:34
+bluetoothctl trust 19:C9:FE:FC:59:34
+bluetoothctl pair 19:C9:FE:FC:59:34
+bluetoothctl connect 19:C9:FE:FC:59:34

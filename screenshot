@@ -1,0 +1,36 @@
+#!/bin/sh
+
+base_dir='/home/ishaan/pictures/screenshots/'
+file_name='%Y%m%d-%H%M%S_$W_$wx$h.png' 
+ss="scrot -F $base_dir$file_name -l mode=edge"
+
+case "$1" in
+    -h|--help)
+        echo "Usage: screenshot.sh [OPTION]..."
+        echo "Take a screenshot of the current screen."
+        echo
+        echo "  -h, --help      display this help and exit"
+        echo "  -s, --select    select a region to capture"
+        echo "  -f, --full      capture the entire screen"
+        echo "  -w, --window    capture the currently focused window"
+        echo "  -c, --clipboard copy screenshot to clipboard"
+        exit 0
+        ;;
+    -s|--select)
+        $ss -s -f
+        ;;
+    -f|--full)
+        $ss
+        ;;
+    -w|--window)
+        $ss -u 
+        ;;
+    -c|--clipboard)
+        $ss -s -f -e 'xclip -selection clipboard -t image/png -i $f && rm $f'
+        ;;
+    *)
+        $ss $@
+        ;;
+esac
+notify-send "Screenshot taken"
+

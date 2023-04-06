@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# echo "$(/home/ishaan/programs/scripts/sb-nettraf) | $(/home/ishaan/programs/scripts/sb-volume) | $(/home/ishaan/programs/scripts/sb-brightness) | $(/home/ishaan/programs/scripts/sb-wifi) |                  Camera      | $(/home/ishaan/programs/scripts/sb-temp) | $(/home/ishaan/programs/scripts/sb-memory) | $(/home/ishaan/programs/scripts/sb-storage) | $(/home/ishaan/programs/scripts/sb-battery)| $(/home/ishaan/programs/scripts/sb-time) | $(/home/ishaan/programs/scripts/sb-date) "
+base_dir="/home/ishaan/programs/scripts/"
+cd "$base_dir" || exit
+echo " | $(sb-temp) | $(sb-storage)| $(sb-memory) | $(sb-brightness) | $(sb-volume) | $(sb-battery) | $(sb-time) | $(sb-date) |"
+# echo "| $(sb-temp) |                         | $(sb-storage)| $(sb-memory) | $(sb-brightness) | $(sb-volume) | $(sb-battery)| $(sb-time) | $(sb-date) |"

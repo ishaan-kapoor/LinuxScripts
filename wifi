@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ "$1" = "list" ] || [ "$1" = "show" ]; then
+  nmcli dev wifi "$1"
+elif [ "$1" = "con" ] || [ "$1" = "connect" ]; then
+  # if $3 is not empty, then connect with password
+  if [ "$3" = "" ]; then
+    nmcli dev wifi connect $2
+  else
+    nmcli dev wifi connect $2 password $3
+  fi
+else
+  echo "error" >&2; exit 1
+fi

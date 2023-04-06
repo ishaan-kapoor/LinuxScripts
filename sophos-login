@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl -X POST -d "mode=191&username=f20212091&password=Password@123" "https://campnet.bits-goa.ac.in:8090/httpclient.html" --ssl-no-revoke

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+basedir="/sys/class/backlight/"				# base dir for backlight class
+handler="$basedir$(ls $basedir)/"			# get the backlight handler
+brightness=$(cat "$handler""brightness")			# get current brightness
+max_brightness=$(cat "$handler""max_brightness")		# get max brightness
+brightness_p=$(( 100 * brightness / max_brightness ))	# get current brightness %
+
+if [ "$brightness_p" -gt 70 ]; then
+     icon="󰃠"
+elif [ $brightness_p -gt 40 ]; then
+     icon="󰃟"
+else
+     icon="󰃞"
+fi
+
+echo "$brightness_p% $icon"

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# kill $(pstree -lp | grep -- -sb-loop\([0-9] | sed 's/.*sleep(\([0-9]\+\)).*/\1/')
+kill "$(pstree -lp | grep "sb-loop([0-9]\+)-\+sleep([0-9]\+)" | sed "s/.*sleep(\([0-9]\+\)).*/\1/")"

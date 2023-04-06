@@ -1,0 +1,16 @@
+#!/bin/sh
+
+image="$1"
+[ -z "$image" ] && image=$(sxiv -to /home/ishaan/pictures/wallpapers/*)
+[ -z "$image" ] && image=/home/ishaan/pictures/wallpapers/win11.jpg
+echo "Chosen Image: $image"
+
+[ ! -f "$image" ] && echo "File does not exist" && exit 1
+[ ! -r "$image" ] && echo "File not readable" && exit 1
+
+# wal -c  # clear cache
+wal -qei "$image"  # set wallpaper and generate theme
+
+/home/ishaan/programs/SucklessTools/remake
+/home/ishaan/programs/scripts/PyWal-Chromium
+

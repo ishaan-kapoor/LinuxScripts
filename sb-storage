@@ -1,0 +1,12 @@
+#!/bin/sh
+
+#df -h | awk '/^\/dev\// {print $0, "   ", $4, "/", $2}'
+for i in $(df -h --output=source,pcent | grep "^/dev/"); do
+	case $i in
+		"/dev/nvme0n1p3") printf "󰖳-";;
+		"/dev/nvme0n1p5") printf "-";;
+        *) (printf '%-4s' "$i") && [ "${i%"%"}" -gt 80 ] && notify-send "Disk Space Low";;
+	esac
+	#printf "$i";
+done
+#echo -e "󰋊-root\n-home\n󰖳-win"

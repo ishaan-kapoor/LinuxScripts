@@ -1,0 +1,6 @@
+#!/bin/sh
+
+temp=$(sensors | awk '/Core 0/ {print $3}' | sed "s/\.[0-9]°C//; s/+//")
+[ "$temp" -gt 50 ] && notify-send -t 1000 "High Temperature"
+[ "$temp" -gt 70 ] && notify-send -u critical "Critical Temperature"
+echo "🌡$temp°C"
