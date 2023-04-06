@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# re='^[+-]?[0-9]+$'
+# if ! [[ $1 =~ $re ]] ; then
+#    echo "error: Not a number" >&2; exit 1
+# fi
+var=$1
+if [ -n "$var" ] && [ "$var" -eq "$var" ] 2>/dev/null; then
+  unset var
+else
+  echo "error: Not a number" >&2; exit 1
+fi
+
+brightness=$(/home/ishaan/programs/scripts/sb-brightness | awk -v num="$1" '{ print $1+num; }')
+/home/ishaan/programs/scripts/brightness "$brightness" || notify-send -u critical "Brigntness Permission not set" "run 'bright'"
+/home/ishaan/programs/scripts/sb-refresh

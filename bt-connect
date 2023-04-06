@@ -1,0 +1,4 @@
+#!/bin/sh
+
+bluetoothctl power on
+bluetoothctl connect 19:C9:FE:FC:59:34

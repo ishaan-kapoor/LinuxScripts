@@ -1,0 +1,7 @@
+#!/bin/sh
+
+sudo modprobe i8k force=1
+sudo systemctl start i8kmon
+sudo "$HOME"/programs/dell-bios-fan-control/dell-bios-fan-control 0
+sudo i8kfan 2 2
+
