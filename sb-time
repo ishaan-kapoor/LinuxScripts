@@ -20,5 +20,5 @@ min=$(date '+%M')
 # [[ "$min" -lt 10 ]] && min="0$min"
 m=$(date "+%p")
 time="$hour:$min$m $icon"
-[ "$min" -lt 1 ] && notify-send "Time" "$time"
+[ "$min" -lt 1 ] && notify-send -t 1000 "Time" "$time"
 echo "$time"
